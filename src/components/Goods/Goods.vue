@@ -25,7 +25,22 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    name: {
+      type: String,
+      default: ''
+    },
+    price: {
+      type: Number,
+      default: 0
+    },
+    count: {
+      type: Number,
+      default: 1
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>

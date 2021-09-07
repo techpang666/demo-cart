@@ -4,25 +4,12 @@
 
 <script>
 export default {
-  // props: ['title']
   props: {
     // 自定义标题属性 通过父组件传值
     title: {
       type: String,
       default: ''
     },
-    // name: {
-    //   type: String,
-    //   default: ''
-    // },
-    // price: {
-    //   type: Number,
-    //   default: 0
-    // },
-    // count: {
-    //   type: Number,
-    //   default: 1
-    // }
   }
 }
 </script>

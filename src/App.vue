@@ -17,9 +17,6 @@ export default {
     Header,
     Goods
   },
-  created() {
-    this.getGoodsList()
-  },
   data() {
     return {
       // 标题
