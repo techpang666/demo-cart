@@ -1,9 +1,30 @@
 <template>
-  <div class="header-container">标题</div>
+  <div class="header-container">{{title}}</div>
 </template>
 
 <script>
-export default {}
+export default {
+  // props: ['title']
+  props: {
+    // 自定义标题属性 通过父组件传值
+    title: {
+      type: String,
+      default: ''
+    },
+    // name: {
+    //   type: String,
+    //   default: ''
+    // },
+    // price: {
+    //   type: Number,
+    //   default: 0
+    // },
+    // count: {
+    //   type: Number,
+    //   default: 1
+    // }
+  }
+}
 </script>
 
 <style lang="less" scoped>
