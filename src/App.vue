@@ -4,7 +4,14 @@
     <!-- 绑定标题变量 -->
     <Header :title="title"></Header>
     <!-- 商品列表部分 -->
-    <!-- <Goods v-for="item in list" :key="item.id" :name="item.goods_name"></Goods> -->
+    <Goods
+    v-for="item in list"
+    :key="item.id"
+    :name="item.goods_name"
+    :pic="item.goods_img"
+    :price="item.goods_price"
+    :state="item.goods_state">
+    </Goods>
   </div>
 </template>
 
@@ -16,6 +23,10 @@ export default {
   components: {
     Header,
     Goods
+  },
+  created() {
+    // 获取商品列表数据
+    this.getGoodsList()
   },
   data() {
     return {
