@@ -4,8 +4,9 @@
     <div class="thumb">
       <div class="custom-control custom-checkbox">
         <!-- 复选框 -->
-        <input type="checkbox" class="custom-control-input" id="cb1" :checked="state" />
-        <label class="custom-control-label" for="cb1">
+        <input type="checkbox" class="custom-control-input" :id="'cb' + id" :checked="state" @change="getState" />
+        <!-- 动态处理对应的商品状态 -->
+        <label class="custom-control-label" :for="'cb' + id">
           <!-- 商品的缩略图 -->
           <img :src="pic" alt="" />
         </label>
@@ -27,6 +28,12 @@
 <script>
 export default {
   props: {
+    // 父组件需要根据id去修改勾选状态
+    id: {
+      // 必传属性 不需要default
+      required: true,
+      type: Number,
+    },
     name: {
       type: String,
       default: ''
@@ -42,6 +49,14 @@ export default {
     state: {
       type: Boolean,
       default: true
+    }
+  },
+  methods: {
+    getState(e) {
+      const newState = e.target.checked
+      // 通过this拿到props的id值
+      // 给父组件传值
+      this.$emit('state-change', {id: this.id, value: newState})
     }
   }
 }

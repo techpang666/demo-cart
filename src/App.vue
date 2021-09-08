@@ -7,10 +7,13 @@
     <Goods
     v-for="item in list"
     :key="item.id"
+    :id="item.id"
     :name="item.goods_name"
     :pic="item.goods_img"
     :price="item.goods_price"
-    :state="item.goods_state">
+    :state="item.goods_state"
+    @state-change="changeState"
+    >
     </Goods>
   </div>
 </template>
@@ -43,6 +46,17 @@ export default {
       if (data.status === 200) {
         this.list = data.list
       }
+    },
+    changeState(e) {
+      // some有一个元素达到条件进行函数处理
+      this.list.some(item => {
+        if(item.id === e.id) {
+          // 修改勾选状态
+          item.goods_state = e.value
+          // 如果id相同 终止循环
+          return true
+        }
+      })
     }
   }
 }
