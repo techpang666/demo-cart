@@ -16,7 +16,7 @@
     >
     </Goods>
     <!-- 结算按钮 -->
-    <Footer :isFull="fullState" @full-change="getFullChange"></Footer>
+    <Footer :isFull="fullState" :total="sum" @full-change="getFullChange"></Footer>
   </div>
 </template>
 
@@ -74,6 +74,10 @@ export default {
     fullState() {
       // 加括号需要return出去
       return this.list.every(item => {return item.goods_state})
+    },
+    sum() {
+      // 先过滤已勾选的商品 再叠加总价
+      return this.list.filter(item => item.goods_state).reduce((total, item) => total += item.goods_price * item.goods_count, 0)
     }
   }
 }
