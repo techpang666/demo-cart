@@ -17,7 +17,7 @@
     >
     </Goods>
     <!-- 结算按钮 -->
-    <Footer :isFull="fullState" :total="sum" @full-change="getFullChange"></Footer>
+    <Footer :isFull="fullState" :total="sum" :all="total" @full-change="getFullChange"></Footer>
   </div>
 </template>
 
@@ -36,7 +36,7 @@ export default {
   created() {
     // 获取商品列表数据
     this.getGoodsList()
-    
+
     // 通过eventBus接收数据
     bus.$on('share', val => {
       this.list.some(item => {
@@ -90,6 +90,9 @@ export default {
     sum() {
       // 先过滤已勾选的商品 再叠加总价
       return this.list.filter(item => item.goods_state).reduce((total, item) => total += item.goods_price * item.goods_count, 0)
+    },
+    total() {
+      return this.list.filter(item => item.goods_state).reduce((total, item) => total += item.goods_count, 0)
     }
   }
 }

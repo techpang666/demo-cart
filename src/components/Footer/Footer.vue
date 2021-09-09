@@ -13,18 +13,25 @@
     </div>
 
     <!-- 结算按钮 -->
-    <button type="button" class="btn btn-primary btn-settle">结算（{{ 0 }}）</button>
+    <button type="button" class="btn btn-primary btn-settle">结算（{{ all }}）</button>
   </div>
 </template>
 
 <script>
 export default {
   props: {
+    // 全选状态
     isFull: {
       type: Boolean,
       default: true
     },
+    // 总价
     total: {
+      type: Number,
+      default: 0
+    },
+    // 已勾选的商品数量
+    all: {
       type: Number,
       default: 0
     }
