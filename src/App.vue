@@ -11,6 +11,7 @@
     :name="item.goods_name"
     :pic="item.goods_img"
     :price="item.goods_price"
+    :count="item.goods_count"
     :state="item.goods_state"
     @state-change="changeState"
     >
@@ -25,6 +26,7 @@ import Header from '@/components/Header/Header'
 import Goods from '@/components/Goods/Goods'
 import Footer from '@/components/Footer/Footer'
 import axios from 'axios'
+import bus from '@/components/eventBus.js'
 export default {
   components: {
     Header,
@@ -34,6 +36,16 @@ export default {
   created() {
     // 获取商品列表数据
     this.getGoodsList()
+    
+    // 通过eventBus接收数据
+    bus.$on('share', val => {
+      this.list.some(item => {
+        if (item.id === val.id) {
+          item.goods_count = val.value
+          return true
+        }
+      })
+    })
   },
   data() {
     return {

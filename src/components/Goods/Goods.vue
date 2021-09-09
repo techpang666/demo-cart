@@ -20,13 +20,18 @@
         <!-- 商品价格 -->
         <span class="goods-price">¥{{ price.toFixed(2) }}</span>
         <!-- 商品的数量 -->
+        <Counter :num="count" :id="id"></Counter>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Counter from '@/components/Counter/Counter'
 export default {
+  components: {
+    Counter
+  },
   props: {
     // 父组件需要根据id去修改勾选状态
     id: {
@@ -49,6 +54,10 @@ export default {
     state: {
       type: Boolean,
       default: true
+    },
+    count: {
+      type: Number,
+      default: 1
     }
   },
   methods: {
