@@ -2,7 +2,7 @@
   <div class="footer-container">
     <!-- 左侧的全选 -->
     <div class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" id="cbFull" :checked="true" />
+      <input type="checkbox" class="custom-control-input" id="cbFull" :checked="isFull" @change="fullChange" />
       <label class="custom-control-label" for="cbFull">全选</label>
     </div>
 
@@ -18,7 +18,20 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    isFull: {
+      type: Boolean,
+      default: true
+    }
+  },
+  methods: {
+    fullChange(e) {
+      // console.log(e.target.checked);
+      this.$emit('full-change', e.target.checked)
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>

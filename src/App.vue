@@ -15,17 +15,21 @@
     @state-change="changeState"
     >
     </Goods>
+    <!-- 结算按钮 -->
+    <Footer :isFull="fullState" @full-change="getFullChange"></Footer>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header/Header'
 import Goods from '@/components/Goods/Goods'
+import Footer from '@/components/Footer/Footer'
 import axios from 'axios'
 export default {
   components: {
     Header,
-    Goods
+    Goods,
+    Footer
   },
   created() {
     // 获取商品列表数据
@@ -47,6 +51,7 @@ export default {
         this.list = data.list
       }
     },
+    // 勾选商品改变全选按钮
     changeState(e) {
       // some有一个元素达到条件进行函数处理
       this.list.some(item => {
@@ -57,6 +62,18 @@ export default {
           return true
         }
       })
+    },
+    // 完成全选功能
+    getFullChange(e) {
+      this.list.forEach(item => {
+        return item.goods_state = e
+      });
+    }
+  },
+  computed: {
+    fullState() {
+      // 加括号需要return出去
+      return this.list.every(item => {return item.goods_state})
     }
   }
 }
